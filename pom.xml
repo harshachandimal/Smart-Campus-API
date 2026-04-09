@@ -14,28 +14,34 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-
         <!-- Jersey Server -->
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-server</artifactId>
-            <version>2.35</version>
+            <version>2.41</version>
         </dependency>
 
         <!-- Jersey Container (Grizzly HTTP Server) -->
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-grizzly2-http</artifactId>
-            <version>2.35</version>
+            <version>2.41</version>
+        </dependency>
+
+        <!-- Jersey Injection (required for runtime startup) -->
+        <dependency>
+            <groupId>org.glassfish.jersey.inject</groupId>
+            <artifactId>jersey-hk2</artifactId>
+            <version>2.41</version>
         </dependency>
 
         <!-- JSON support -->
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-binding</artifactId>
-            <version>2.35</version>
+            <version>2.41</version>
         </dependency>
-
     </dependencies>
+
 
 </project>
