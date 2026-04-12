@@ -10,7 +10,8 @@ public class Room {
     private int capacity;
     private List<String> sensorIds = new ArrayList<>();
 
-    public Room() {}
+    public Room() {
+    }
 
     public Room(String id, String name, int capacity) {
         this.id = id;
