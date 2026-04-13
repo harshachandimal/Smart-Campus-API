@@ -79,4 +79,9 @@ public class RoomResource {
 
         return Response.ok("Room deleted successfully").build();
     }
+
+    @Path("/{roomId}/sensors")
+    public RoomSensorResource getRoomSensorResource(@PathParam("roomId") String roomId) {
+        return new RoomSensorResource(roomId);
+    }
 }
