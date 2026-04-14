@@ -72,7 +72,7 @@ public class RoomResource {
 
         // ! IMPORTANT LOGIC
         if (!room.getSensorIds().isEmpty()) {
-            throw new RoomNotEmptyException("Room has sensors assigned");
+            throw new RoomNotEmptyException("Room has sensors");
         }
 
         DataStore.rooms.remove(id);
