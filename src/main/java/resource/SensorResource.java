@@ -55,4 +55,17 @@ public class SensorResource {
 
         return Response.status(Response.Status.CREATED).entity(sensor).build();
     }
+
+    // Sub-resource locator for sensor readings
+    @Path("{sensorId}/readings")
+    public SensorReadingResource getReadings(@PathParam("sensorId") String sensorId) {
+
+        Sensor sensor = DataStore.sensors.get(sensorId);
+
+        if (sensor == null) {
+            throw new NotFoundException("Sensor not found");
+        }
+
+        return new SensorReadingResource(sensorId);
+    }
 }
