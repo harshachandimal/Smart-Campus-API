@@ -5,8 +5,11 @@ import service.DataStore;
 import exception.RoomNotEmptyException;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.net.URI;
 import java.util.Collection;
 
 
@@ -22,9 +25,9 @@ public class RoomResource {
         return DataStore.rooms.values();
     }
 
-    //  POST create room
+    //  POST create room — returns 201 Created with Location header
     @POST
-    public Response createRoom(Room room) {
+    public Response createRoom(Room room, @Context UriInfo uriInfo) {
 
         if (room.getId() == null || room.getId().isEmpty()) {
             return Response.status(Response.Status.BAD_REQUEST)
@@ -39,7 +42,14 @@ public class RoomResource {
         }
 
         DataStore.rooms.put(room.getId(), room);
-        return Response.status(Response.Status.CREATED).entity(room).build();
+
+        // Build the Location URI pointing to the newly created room
+        URI location = uriInfo.getAbsolutePathBuilder().path(room.getId()).build();
+
+        return Response.status(Response.Status.CREATED)
+                .entity(room)
+                .location(location)
+                .build();
     }
 
     //  GET room by ID
