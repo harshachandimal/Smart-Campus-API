@@ -1,5 +1,6 @@
 package resource;
 
+import exception.SensorUnavailableException;
 import model.Sensor;
 import model.SensorReading;
 import service.DataStore;
@@ -48,6 +49,13 @@ public class SensorReadingResource {
 
         if (sensor == null) {
             throw new NotFoundException("Sensor not found");
+        }
+
+        // State Constraint: Sensors in MAINTENANCE cannot accept new readings
+        if ("MAINTENANCE".equalsIgnoreCase(sensor.getStatus())) {
+            throw new SensorUnavailableException(
+                    "Sensor " + sensorId + " is currently under MAINTENANCE and cannot accept new readings."
+            );
         }
 
         // Set the sensorId on the reading
